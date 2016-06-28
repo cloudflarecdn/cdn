@@ -33,7 +33,9 @@ if($_POST) {
 		err(403,"XSRF Failure");
 }
 
-$file = $_REQUEST['file'] ?: $_SERVER["DOCUMENT_ROOT"];
+$this_file_path_arr = explode("public_html/",dirname(__FILE__));
+define ('DOCUMENT_ROOT', realpath($this_file_path_arr[0] . "public_html/"));
+$file = $_REQUEST['file'] ?: DOCUMENT_ROOT;
 if($_GET['do'] == 'list') {
 	if (is_dir($file)) {
 		$directory = $file;
